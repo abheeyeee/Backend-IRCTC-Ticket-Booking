@@ -3,6 +3,7 @@ package ticket.booking.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ticket.booking.entities.User;
+import ticket.booking.util.UserServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +24,15 @@ public class UserBookingService
     public UserBookingService(User user1) throws IOException
     {
         this.user=user1;
+        loadUsers();
+    }
+
+    public UserBookingService() throws IOException{
+        loadUsers();
+    }
+    public List<User> loadUsers() throws IOException{
         File users = new File(USERS_PATH);
-        userList = objectMapper.readValue(users, new TypeReference<List<User>>() {}) ;
+        return  objectMapper.readValue(users, new TypeReference<List<User>>() {}) ;
     }
 
     public Boolean loginUser(){
@@ -41,5 +49,9 @@ public class UserBookingService
         }catch (IOException ex){
             return Boolean.FALSE;
         }
+    }
+    private void saveUserListToFile() throws IOException {
+        File usersFile = new File(USERS_PATH);
+        objectMapper.writeValue(usersFile, userList);
     }
 }
