@@ -1,17 +1,24 @@
 package ticket.booking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@JsonNaming (PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private String name;
-
     private String password;
-
     private String hashedPassword;
-
     private List<Ticket> ticketsBooked;
-
     private String userId;
 
     public User(String name, String password, String hashedPassword, List<Ticket> ticketsBooked, String userId){

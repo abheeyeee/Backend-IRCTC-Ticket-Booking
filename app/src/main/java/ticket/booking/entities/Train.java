@@ -1,10 +1,22 @@
 package ticket.booking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@Builder
 public class Train {
+
     private String trainId;
 
     private String trainNo;
@@ -68,4 +80,5 @@ public class Train {
     public String getTrainInfo(){
         return String.format("Train ID: %s Train No: %s", trainId, trainNo);
     }
+
 }
